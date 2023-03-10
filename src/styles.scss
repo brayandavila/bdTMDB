@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -20,13 +19,15 @@ $bdTMDB-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$bdTMDB-theme: mat.define-light-theme((
-  color: (
-    primary: $bdTMDB-primary,
-    accent: $bdTMDB-accent,
-    warn: $bdTMDB-warn,
+$bdTMDB-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $bdTMDB-primary,
+      accent: $bdTMDB-accent,
+      warn: $bdTMDB-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -35,8 +36,51 @@ $bdTMDB-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Lato", "Helvetica Neue", sans-serif;
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
 
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a1a1a1;
+}
+.card-hover:hover {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  animation: transform 1s;
+  -webkit-transform: scale(1.03);
+  transform: scale(1.03);
+}
+@keyframes transform {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+  }
+}
+.text-justify {
+  text-align: justify;
+}
+.card-body {
+  background-color: #f0f1f2;
+}
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";

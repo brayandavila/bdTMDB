@@ -1,4 +1,4 @@
-export interface PopularList {
+export interface MoviesList {
   page: BigInteger;
   results: Result[];
   total_pages: BigInteger;

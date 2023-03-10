@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { debounceTime, map } from 'rxjs';
-import { PopularList } from 'src/app/core/interfaces/popular-list';
+import { MoviesList } from 'src/app/core/interfaces/movies-list';
 import { MoviesService } from 'src/app/core/services/movies.service';
 
 @Component({
@@ -67,10 +67,14 @@ export class MoviesComponent implements OnInit {
       }
     })
     genrer.valueChanges.subscribe((r: any) => {
-      let params = {
-        with_genres: [...r]
+      if (r) {
+        name.reset();
+        section.reset();
+        let params = {
+          with_genres: r.toString()
+        }
+        this.discover(params)
       }
-      this.discover(params)
     })
   }
 
@@ -119,13 +123,11 @@ export class MoviesComponent implements OnInit {
   getQueryParams() {
     this.route.queryParamMap.subscribe((params: any) => {
       this.page_aux = params.params.pag
-      console.log(params)
       if (params.params.name) {
         this.form.patchValue({
           name: params.params.name,
         })
         if (params.params.pag) {
-          console.log('hay page')
           this.searchMovie(params.params.name, params.params.pag);
         } else {
           this.searchMovie(params.params.name)

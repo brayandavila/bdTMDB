@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PopularList } from '../interfaces/popular-list';
+import { MoviesList } from '../interfaces/movies-list';
 import { environment } from 'src/environments/environment.development';
 import { GenresMovie } from '../interfaces/genres-movie';
+import { MovieDetails } from '../interfaces/movie-details.interface';
+import { MovieCredits } from '../interfaces/movie-credits.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +15,11 @@ export class MoviesService {
   constructor(private http: HttpClient) { }
 
   public getMovies(section: string, page: number) {
-    return this.http.get<PopularList>(`${environment.apiURL}movie/${section}${environment.apiKey}${environment.lenguaje}&page=${page}`)
+    return this.http.get<MoviesList>(`${environment.apiURL}movie/${section}${environment.apiKey}${environment.lenguaje}&page=${page}`)
   }
 
   public searchMovie(query: string, page: number) {
-    return this.http.get<PopularList>(this.search + '&page=' + page + '&query=' + query)
+    return this.http.get<MoviesList>(this.search + '&page=' + page + '&query=' + query)
   }
 
   public getGenres() {
@@ -25,6 +27,14 @@ export class MoviesService {
   }
 
   public discover(params: any) {
-    return this.http.get<PopularList>(environment.apiURL + 'discover/movie' + environment.apiKey + environment.lenguaje, { params })
+    return this.http.get<MoviesList>(environment.apiURL + 'discover/movie' + environment.apiKey + environment.lenguaje, { params })
+  }
+
+  public getMovie(id: number) {
+    return this.http.get<MovieDetails>(`${environment.apiURL}movie/${id}${environment.apiKey}${environment.lenguaje}`)
+  }
+
+  public getCast(id: number) {
+    return this.http.get<MovieCredits>(`${environment.apiURL}movie/${id}/credits${environment.apiKey}${environment.lenguaje}`)
   }
 }

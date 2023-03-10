@@ -1,7 +1,8 @@
-<nav class="navbar sticky-top navbar-expand-lg bg-light">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark">
   <div class="container-fluid">
     <a class="navbar-brand me-2" routerLink="/">
       <img src="assets/img/bd.png" height="40" alt="" />
+      TMDB BD
     </a>
     <button
       class="navbar-toggler btn bnt-link"
@@ -18,9 +19,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item ml-5">
           <a
             class="nav-link"
+            [routerLinkActive]="['active']"
             role="button"
             aria-current="page"
             [routerLink]="'/movies'"
@@ -28,12 +30,20 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" role="button" [routerLink]="'/shows'"
+          <a
+            class="nav-link"
+            role="button"
+            [routerLinkActive]="['active']"
+            [routerLink]="'/shows'"
             >Series de TV</a
           >
         </li>
       </ul>
       <form class="d-flex">
+        <button type="button" class="btn btn-outline-light px-3 me-2">
+          Inicia sesión
+        </button>
+        <button type="button" class="btn btn-light me-3">Regístrate</button>
         <a
           class="btn btn-dark btn-sm px-3"
           href="https://github.com/brayandavila"

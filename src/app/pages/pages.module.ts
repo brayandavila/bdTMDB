@@ -15,12 +15,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
+import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
     MoviesComponent,
     ShowsComponent,
-    ActorsComponent
+    ActorsComponent,
+    MovieDetailsComponent
   ],
   imports: [
     CommonModule,
