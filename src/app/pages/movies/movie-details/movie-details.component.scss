@@ -27,8 +27,11 @@
   white-space: nowrap;
 }
 
-.borde {
+.card-list-horizontal {
   position: relative;
   display: inline-block;
   vertical-align: middle;
+}
+.card-title {
+  white-space: break-spaces;
 }

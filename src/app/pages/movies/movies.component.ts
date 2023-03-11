@@ -16,6 +16,7 @@ import { MoviesService } from 'src/app/core/services/movies.service';
 export class MoviesComponent implements OnInit {
   movies: any[] = [];
   genres: any[] = [];
+  loading: boolean = false;
   form: any;
   orderObj: any;
   title: string = '';
@@ -57,13 +58,15 @@ export class MoviesComponent implements OnInit {
     let genrer = this.form.get('genrer');
     name.valueChanges.pipe(debounceTime(500)).subscribe((r: any) => {
       if (r) {
-        section.reset()
+        section.reset();
+        genrer.reset();
         this.searchMovie(r, this.page_aux)
       }
     })
     section.valueChanges.subscribe((r: any) => {
       if (r) {
-        name.reset()
+        name.reset();
+        genrer.reset();
       }
     })
     genrer.valueChanges.subscribe((r: any) => {
@@ -78,10 +81,15 @@ export class MoviesComponent implements OnInit {
     })
   }
 
-  discover(params: any) {
-    this._movies.discover(params).subscribe((res: any) => {
-      this.movies = res.results
-      this.paginator.length = res.total_results
+  discover(params: any, page = 1) {
+    this.title = 'Por géneros'
+    this.loading = true;
+    this.setFiltros(page);
+    this.paginator.page = page
+    this._movies.discover(params, page).subscribe((res: any) => {
+      this.movies = res.results;
+      this.paginator.length = res.total_results;
+      this.loading = false;
     })
   }
 
@@ -102,21 +110,25 @@ export class MoviesComponent implements OnInit {
       default:
         break;
     }
+    this.loading = true;
     this.setFiltros(page);
     this.paginator.page = page
     this._movies.getMovies(section, page).subscribe((res: any) => {
       this.movies = res.results
       this.paginator.length = res.total_results
+      this.loading = false;
     })
   }
 
   searchMovie(query: string, page: number = 1) {
+    this.loading = true;
     this.setFiltros(page);
     this.title = 'Resultados de búsqueda'
     this.paginator.page = page
     this._movies.searchMovie(query, page).subscribe((res: any) => {
       this.movies = res.results;
       this.paginator.length = res.total_results;
+      this.loading = false;
     })
   }
   page_aux: any;
@@ -132,9 +144,31 @@ export class MoviesComponent implements OnInit {
         } else {
           this.searchMovie(params.params.name)
         }
-      } else {
+      } else if (params.params.section) {
         this.form.patchValue({
           section: params.params.section || 'popular'
+        })
+        if (params.params.pag) {
+          this.getMovies(this.form.get('section').value, params.params.pag);
+        } else {
+          this.getMovies(this.form.get('section').value)
+        }
+      } else if (params.params.genrer) {
+        const arr = params.params.genrer.split(",").map((x: any) => Number(x));
+        this.form.patchValue({
+          genrer: arr
+        })
+        let params_genrer = {
+          with_genres: this.form.get('genrer').value.toString()
+        }
+        if (params.params.pag) {
+          this.discover(params_genrer, params.params.pag);
+        } else {
+          this.discover(params_genrer)
+        }
+      } else {
+        this.form.patchValue({
+          section: 'popular'
         })
         if (params.params.pag) {
           this.getMovies(this.form.get('section').value, params.params.pag);
@@ -164,8 +198,13 @@ export class MoviesComponent implements OnInit {
   handlePageEvent(e: PageEvent) {
     if (this.form.get('section').value) {
       this.getMovies(this.form.get('section').value, e.pageIndex + 1)
-    } else {
+    } else if (this.form.get('name').value) {
       this.searchMovie(this.form.get('name').value, e.pageIndex + 1)
+    } else if (this.form.get('genrer').value) {
+      let params_genrer = {
+        with_genres: this.form.get('genrer').value.toString()
+      }
+      this.discover(params_genrer, e.pageIndex + 1)
     }
   }
 

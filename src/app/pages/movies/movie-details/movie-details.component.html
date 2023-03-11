@@ -12,12 +12,26 @@
       />
     </div>
     <div class="col-md-8 p-5">
-      <h2 class="fw-bold">
-        {{ movie.title }}
-      </h2>
-      <small
-        >{{ movie.vote_average | number : "1.0-0" }} <i class="fa fa-star"></i
-      ></small>
+      <div class="d-flex align-items-center">
+        <h2 class="fw-bold me-3">{{ movie.title }}</h2>
+        <span
+          class="badge rounded-pill"
+          [class]="
+            movie.vote_average >= 7
+              ? 'text-bg-success'
+              : movie.vote_average <= 4
+              ? 'text-bg-danger'
+              : movie.vote_average < 7 && movie.vote_average > 4
+              ? 'text-bg-warning'
+              : ''
+          "
+          >{{ movie.vote_average | number : "1.0-0" }} <i class="fa fa-star"></i
+        ></span>
+        <!-- <span class="text-muted fs-6">
+          {{ movie.vote_average | number : "1.0-0" }} <i class="fa fa-star"></i>
+        </span> -->
+      </div>
+
       <br />
       <div class="fw-bold fs-5">Resumen</div>
       <p class="text-justify fs-6">
@@ -77,31 +91,17 @@
 </div>
 <h3 class="text-center mt-5">Actores</h3>
 <div class="container-fluid horizontal-scroll">
-  <div class="row text-center">
+  <div class="row text-center py-4">
     <ng-container *ngFor="let cas of cast">
-      <div
-        class="col-2 borde card text-bg-light card-hover rounded"
-        role="button"
-      >
-        <img class="card-img-top" [src]="getImagePath(cas.profile_path)" />
-        <div class="card-body">
-          <h6 class="card-title">{{ cas.character }}</h6>
-          <p class="card-text">{{ cas.original_name }}</p>
+      <div class="col-md-2 col-sm-6 col-xs-6 h-100 card-list-horizontal">
+        <div class="card text-bg-light card-hover rounded" role="button">
+          <img class="card-img-top" [src]="getImagePath(cas.profile_path)" />
+          <div class="card-body">
+            <h6 class="card-title">{{ cas.character }}</h6>
+            <p class="card-text">{{ cas.original_name }}</p>
+          </div>
         </div>
       </div>
-      <!-- <div
-        class="col-2 borde"
-        routerLink="/peliculasbd/detactoresbd/{{ cas.id }}"
-      >
-        <br /><br />
-        <img
-          class="card-img-top rounded-top"
-          src="{{ getImagePath(cas.profile_path) }}"
-          alt="{{ cas.original_name }}"
-        />
-        <h5 class="text-truncate">{{ cas.character }}</h5>
-        <h6 class="card-title ms-2 text-truncate">{{ cas.original_name }}</h6>
-      </div> -->
     </ng-container>
   </div>
 </div>

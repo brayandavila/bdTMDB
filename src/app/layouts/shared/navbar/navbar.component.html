@@ -40,7 +40,11 @@
         </li>
       </ul>
       <form class="d-flex">
-        <button type="button" class="btn btn-outline-light px-3 me-2">
+        <button
+          type="button"
+          class="btn btn-outline-light px-3 me-2"
+          (click)="modalLogin.openModal()"
+        >
           Inicia sesión
         </button>
         <button type="button" class="btn btn-light me-3">Regístrate</button>
@@ -55,3 +59,5 @@
     </div>
   </div>
 </nav>
+
+<app-modal-login #modalLogin></app-modal-login>

@@ -26,8 +26,8 @@ export class MoviesService {
     return this.http.get<GenresMovie>(environment.apiURL + 'genre/movie/list' + environment.apiKey + environment.lenguaje)
   }
 
-  public discover(params: any) {
-    return this.http.get<MoviesList>(environment.apiURL + 'discover/movie' + environment.apiKey + environment.lenguaje, { params })
+  public discover(params: any, page: number) {
+    return this.http.get<MoviesList>(environment.apiURL + 'discover/movie' + environment.apiKey + environment.lenguaje + '&page=' + page, { params })
   }
 
   public getMovie(id: number) {
