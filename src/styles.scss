@@ -1,13 +1,12 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use "@angular/material" as mat;
-// Plus imports for other components in your app.
 
+// Plus imports for other components in your app.
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat.core();
-
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -19,10 +18,43 @@ $bdTMDB-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
+$md-custom_primary: (
+  50: #e1f2f1,
+  100: #b4d9d8,
+  200: #80c0c1,
+  300: #4d9ba0,
+  400: #267f87,
+  500: #1b7a6b,
+  600: #186d5d,
+  700: #145e4f,
+  800: #105140,
+  900: #063427,
+  A100: #81d9d6,
+  A200: #4ec1bf,
+  A400: #1baba8,
+  A700: #00a59f,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+$my-app-primary: mat.define-palette($md-custom_primary);
 $bdTMDB-theme: mat.define-light-theme(
   (
     color: (
-      primary: $bdTMDB-primary,
+      primary: $my-app-primary,
       accent: $bdTMDB-accent,
       warn: $bdTMDB-warn,
     ),
@@ -61,6 +93,9 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #a1a1a1;
 }
+.card-hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
 .card-hover:hover {
   box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
   animation: transform 1s;
@@ -83,5 +118,28 @@ body {
 .card-body {
   background-color: #f0f1f2;
 }
+.fs-7 {
+  font-size: 0.9rem;
+}
+
+.card-img-custom {
+  height: 20rem;
+  object-fit: cover;
+}
+
+@media (max-width: 576px) {
+  .card-img-custom {
+    height: 13rem;
+    min-height: auto;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 1400px) {
+  .card-img-custom {
+    height: 15rem;
+    min-height: auto;
+  }
+}
 /* Importing Bootstrap SCSS file. */
+$primary: #1b7a6b;
 @import "bootstrap/scss/bootstrap";

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +11,9 @@ import { PagesModule } from './pages/pages.module';
 import { CoreModule } from './core/core.module';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getEspañolPaginatorIntl } from './core/utils/es-paginator-intl';
-
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs, 'es');
 @NgModule({
   declarations: [
     AppComponent
@@ -27,7 +29,8 @@ import { getEspañolPaginatorIntl } from './core/utils/es-paginator-intl';
     CoreModule
   ],
   providers: [
-    { provide: MatPaginatorIntl, useValue: getEspañolPaginatorIntl() }
+    { provide: MatPaginatorIntl, useValue: getEspañolPaginatorIntl() },
+    { provide: LOCALE_ID, useValue: 'es-CO' }
   ],
   bootstrap: [AppComponent]
 })

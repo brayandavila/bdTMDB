@@ -22,7 +22,6 @@ export class LayoutComponent implements AfterViewInit {
     const scrollPosition = this.viewportScroller.getScrollPosition();
     const viewportHeight = window.innerHeight - scrollPosition[1];
     this.viewportHeight = viewportHeight;
-    console.log(this.viewportHeight)
   }
 
 }

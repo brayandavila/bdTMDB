@@ -17,6 +17,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 import { ComponentsModule } from '../components/components.module';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ComponentsModule } from '../components/components.module';
     MatRadioModule,
     MatChipsModule,
     MatDividerModule,
-    ComponentsModule
+    ComponentsModule,
+    MatExpansionModule
   ]
 })
 export class PagesModule { }

@@ -1,11 +1,11 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
   <div class="container-fluid">
     <a class="navbar-brand me-2" routerLink="/">
-      <img src="assets/img/bd.png" height="40" alt="" />
-      TMDB BD
+      <img src="assets/img/logo3.svg" height="40" alt="" />
+      <span class="d-sm-none ps-3">API IMDB</span>
     </a>
     <button
-      class="navbar-toggler btn bnt-link"
+      class="navbar-toggler btn bnt-link text-white"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNavDropdown"
@@ -26,7 +26,8 @@
             role="button"
             aria-current="page"
             [routerLink]="'/movies'"
-            >Películas</a
+          >
+            <i class="fas fa-film"></i> Películas</a
           >
         </li>
         <li class="nav-item">
@@ -35,7 +36,8 @@
             role="button"
             [routerLinkActive]="['active']"
             [routerLink]="'/shows'"
-            >Series de TV</a
+          >
+            <i class="fas fa-tv"></i> Series de TV</a
           >
         </li>
       </ul>
@@ -49,7 +51,7 @@
         </button>
         <button type="button" class="btn btn-light me-3">Regístrate</button>
         <a
-          class="btn btn-dark btn-sm px-3"
+          class="btn btn-dark btn-sm px-3 d-flex align-items-center"
           href="https://github.com/brayandavila"
           target="_blank"
           role="button"

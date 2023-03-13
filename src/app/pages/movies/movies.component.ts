@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
@@ -36,9 +36,27 @@ export class MoviesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.onResize();
     this.createForm();
     this.getQueryParams();
-    this.getGenres()
+    this.getGenres();
+  }
+
+  filters_search: boolean = true;
+  filters_section: boolean = true;
+  filters_genres: boolean = true;
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    if (window.innerWidth < 992) {
+      this.filters_search = false;
+      this.filters_section = false;
+      this.filters_genres = false;
+    } else {
+      this.filters_search = true;
+      this.filters_section = true;
+      this.filters_genres = true;
+    }
   }
 
   getGenres() {

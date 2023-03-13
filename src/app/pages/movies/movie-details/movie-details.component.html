@@ -1,123 +1,129 @@
-<div
-  class="background-movie-detail"
-  [ngStyle]="{
-    'background-image': getBackgroundImageStyle(movie.backdrop_path)
-  }"
->
-  <div class="row">
-    <div class="col-md-4 px-5 pt-5 mb-4">
-      <img
-        [src]="getImagePath(movie.poster_path)"
-        class="img-fluid rounded mx-auto d-block img-path-movie-detail"
-      />
-    </div>
-    <div class="col-md-8 p-5">
-      <div class="d-flex align-items-center">
-        <h2 class="fw-bold me-3">{{ movie.title }}</h2>
-        <span
-          class="badge rounded-pill"
-          [class]="
-            movie.vote_average >= 7
-              ? 'text-bg-success'
-              : movie.vote_average <= 4
-              ? 'text-bg-danger'
-              : movie.vote_average < 7 && movie.vote_average > 4
-              ? 'text-bg-warning'
-              : ''
-          "
-          >{{ movie.vote_average | number : "1.0-0" }} <i class="fa fa-star"></i
-        ></span>
-        <!-- <span class="text-muted fs-6">
-          {{ movie.vote_average | number : "1.0-0" }} <i class="fa fa-star"></i>
-        </span> -->
+<ng-container *ngIf="!loading">
+  <div
+    class="background-movie-detail"
+    [ngStyle]="{
+      'background-image': getBackgroundImageStyle(movie.backdrop_path)
+    }"
+  >
+    <div class="row">
+      <div class="col-md-4 px-5 pt-5 mb-4">
+        <img
+          [src]="getImagePath(movie.poster_path)"
+          class="img-fluid rounded mx-auto d-block img-path-movie-detail"
+        />
       </div>
+      <div class="col-md-8 p-5">
+        <div class="d-flex align-items-center">
+          <h2 class="fw-bold me-3">{{ movie.title }}</h2>
+          <span
+            class="badge rounded-pill"
+            [class]="
+              movie.vote_average >= 7
+                ? 'text-bg-success'
+                : movie.vote_average <= 4
+                ? 'text-bg-danger'
+                : movie.vote_average < 7 && movie.vote_average > 4
+                ? 'text-bg-warning'
+                : ''
+            "
+            >{{ movie.vote_average | number : "1.0-0" }}
+            <i class="fa fa-star"></i
+          ></span>
+          <!-- <span class="text-muted fs-6">
+            {{ movie.vote_average | number : "1.0-0" }} <i class="fa fa-star"></i>
+          </span> -->
+        </div>
 
-      <br />
-      <div class="fw-bold fs-5">Resumen</div>
-      <p class="text-justify fs-6">
-        {{
-          movie.overview ||
-            "No se ha encontrado una descripción para" + movie.title
-        }}
-      </p>
-      <p class="fs-6 fst-italic">{{ movie.tagline || "" }}</p>
-      <div class="row">
-        <div class="col-md">
-          <div class="fw-bold fs-5">Géneros:</div>
-          <p>
-            <span *ngFor="let item of movie.genres">{{ item.name }}. </span>
-          </p>
-        </div>
-        <div class="col-md">
-          <div class="fw-bold fs-5">Título original:</div>
-          <p *ngIf="movie.original_title">{{ movie.original_title }}</p>
-        </div>
-        <div class="col-md">
-          <div class="fw-bold fs-5">Lenguaje original:</div>
-          <p *ngIf="movie.original_language">{{ movie.original_language }}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md">
-          <div class="fw-bold fs-5">Estado:</div>
-          <p *ngIf="movie.status">{{ movie.status }}</p>
-        </div>
-        <div class="col-md">
-          <div class="fw-bold fs-5">Fecha de estreno:</div>
-          <p *ngIf="movie.release_date">{{ movie.release_date | date }}</p>
-        </div>
-        <div class="col-md">
-          <div class="fw-bold fs-5">Número de valoraciones:</div>
-          <p *ngIf="movie.vote_count">{{ movie.vote_count | number }}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md">
-          <div class="fw-bold fs-5">Popularidad:</div>
-          <p *ngIf="movie.popularity">{{ movie.popularity | number }}</p>
-        </div>
-        <div class="col-md">
-          <div class="fw-bold fs-5">Página Web:</div>
-          <p>
-            <a class="link-light" target="_blank" [href]="movie.homepage || ''"
-              >Visita la web</a
-            >
-          </p>
-        </div>
-        <div class="col"></div>
-      </div>
-    </div>
-  </div>
-</div>
-<h3 class="text-center mt-5">Actores</h3>
-<div class="container-fluid horizontal-scroll">
-  <div class="row text-center py-4">
-    <ng-container *ngFor="let cas of cast">
-      <div class="col-md-2 col-sm-6 col-xs-6 h-100 card-list-horizontal">
-        <div class="card text-bg-light card-hover rounded" role="button">
-          <img class="card-img-top" [src]="getImagePath(cas.profile_path)" />
-          <div class="card-body">
-            <h6 class="card-title">{{ cas.character }}</h6>
-            <p class="card-text">{{ cas.original_name }}</p>
+        <br />
+        <div class="fw-bold fs-5">Resumen</div>
+        <p class="text-justify fs-6">
+          {{
+            movie.overview ||
+              "No se ha encontrado una descripción para" + movie.title
+          }}
+        </p>
+        <p class="fs-6 fst-italic">{{ movie.tagline || "" }}</p>
+        <div class="row">
+          <div class="col-md">
+            <div class="fw-bold fs-5">Géneros:</div>
+            <p>
+              <span *ngFor="let item of movie.genres">{{ item.name }}. </span>
+            </p>
+          </div>
+          <div class="col-md">
+            <div class="fw-bold fs-5">Título original:</div>
+            <p *ngIf="movie.original_title">{{ movie.original_title }}</p>
+          </div>
+          <div class="col-md">
+            <div class="fw-bold fs-5">Lenguaje original:</div>
+            <p *ngIf="movie.original_language">{{ movie.original_language }}</p>
           </div>
         </div>
-      </div>
-    </ng-container>
-  </div>
-</div>
-<!-- <div class="container-fluid" >
-    <h2 class="text-center">Videos</h2><br>
-    <div class="container-fluid scrollh">
-        <div class="row text-center">
-            <div class="col-6" *ngFor="let vid of video">
-                <youtube-player
-                    videoId="{{vid.key}}"
-                    suggestedQuality="highres"
-                    [height]="250" [width]="500"
-                    [startSeconds]="4"
-                    [endSeconds]="8">
-                </youtube-player>
-            </div>
+        <div class="row">
+          <div class="col-md">
+            <div class="fw-bold fs-5">Estado:</div>
+            <p *ngIf="movie.status">{{ movie.status }}</p>
+          </div>
+          <div class="col-md">
+            <div class="fw-bold fs-5">Fecha de estreno:</div>
+            <p *ngIf="movie.release_date">{{ movie.release_date | date }}</p>
+          </div>
+          <div class="col-md">
+            <div class="fw-bold fs-5">Número de valoraciones:</div>
+            <p *ngIf="movie.vote_count">{{ movie.vote_count | number }}</p>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-md">
+            <div class="fw-bold fs-5">Popularidad:</div>
+            <p *ngIf="movie.popularity">{{ movie.popularity | number }}</p>
+          </div>
+          <div class="col-md">
+            <div class="fw-bold fs-5">Página Web:</div>
+            <p>
+              <a
+                class="link-light"
+                target="_blank"
+                [href]="movie.homepage || ''"
+                >Visita la web</a
+              >
+            </p>
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
     </div>
-</div> -->
+  </div>
+  <h3 class="text-center mt-5">Actores</h3>
+  <div class="container-fluid horizontal-scroll">
+    <div class="row text-center py-4">
+      <ng-container *ngFor="let cas of cast">
+        <div class="col-md-2 col-sm-6 col-xs-6 h-100 card-list-horizontal">
+          <div class="card text-bg-light card-hover rounded" role="button">
+            <img class="card-img-top" [src]="getImagePath(cas.profile_path)" />
+            <div class="card-body">
+              <h6 class="card-title">{{ cas.character }}</h6>
+              <p class="card-text">{{ cas.original_name }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <!-- <div class="container-fluid" >
+      <h2 class="text-center">Videos</h2><br>
+      <div class="container-fluid scrollh">
+          <div class="row text-center">
+              <div class="col-6" *ngFor="let vid of video">
+                  <youtube-player
+                      videoId="{{vid.key}}"
+                      suggestedQuality="highres"
+                      [height]="250" [width]="500"
+                      [startSeconds]="4"
+                      [endSeconds]="8">
+                  </youtube-player>
+              </div>
+          </div>
+      </div>
+  </div> -->
+</ng-container>

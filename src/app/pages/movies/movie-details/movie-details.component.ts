@@ -13,7 +13,7 @@ export class MovieDetailsComponent implements OnInit {
 
   movie: any = {};
   cast: any[] = [];
-
+  loading: boolean = true;
   constructor(
     private _movies: MoviesService,
     private route: ActivatedRoute,
@@ -37,6 +37,7 @@ export class MovieDetailsComponent implements OnInit {
   getMovie(id: any) {
     this._movies.getMovie(id).subscribe((res => {
       this.movie = res;
+      this.loading = false;
     }))
   }
 
