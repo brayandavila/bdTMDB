@@ -1,29 +1,49 @@
-# BdTMDB
+# Angular TMDB Movie App 🎬
 
-Proyecto desplegado -> [TMDB BD](https://angulartmdb.000webhostapp.com/)
+![Screenshot](https://lh3.googleusercontent.com/u/0/drive-viewer/AITFw-zWoH2kmqB-75nVnue855rHwmAuxTK2NfDqLDGUlDSrkFe51YlusRO2_wbvCxzbbm4wvkyBpbbJf4WpbjoaJpLXxByQFw=w1920-h1080)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+This is an Angular 15 project that connects to the [TMDB API](https://www.themoviedb.org/documentation/api) to fetch and list movies. You can see the live demo of the app [here](https://angulartmdb.000webhostapp.com/movies).
 
-## Development server
+## Features ✨
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Fetches popular movies from the TMDB API.
+- Displays movie posters, titles, and release dates.
+- Allows users to browse through a list of movies.
 
-## Code scaffolding
+## Technologies Used 🛠️
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Angular 15
+- HTML5, CSS3, and JavaScript
+- [TMDB API](https://www.themoviedb.org/documentation/api) for movie data
 
-## Build
+## Installation 🚀
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone the repository: `git clone https://github.com/your-username/your-angular-tmdb-app.git`
+2. Navigate to the project directory: `cd your-angular-tmdb-app`
+3. Install dependencies: `npm install`
+4. Run the development server: `ng serve`
+5. Open your browser and go to `http://localhost:4200/` to see the app in action.
 
-## Running unit tests
+## Usage 🎥
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Upon loading the app, you will see a list of popular movies fetched from the TMDB API.
+- Scroll through the list to explore different movies.
+- Click on a movie to view more details or additional movie information.
 
-## Running end-to-end tests
+## Contributing 🤝
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Contributions are always welcome! If you find any bugs or have suggestions for new features, feel free to open an issue or create a pull request.
 
-## Further help
+## Credits 👏
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Thanks to the [TMDB API](https://www.themoviedb.org/documentation/api) for providing the movie data and making this project possible.
+
+## Live Demo 🌐
+
+You can see the live demo of the app [here](https://angulartmdb.000webhostapp.com/movies).
+
+## Contact 📧
+
+If you have any questions or inquiries, feel free to reach out via email at `brageodavovi@gmail.com`.
+
+Enjoy exploring movies with the Angular TMDB Movie App! 🍿🎉
