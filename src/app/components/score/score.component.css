@@ -1,0 +1,11 @@
+.mat-warn {
+  --mdc-circular-progress-active-indicator-color: #bebf2c;
+}
+
+.mat-accent {
+  --mdc-circular-progress-active-indicator-color: #eb1114;
+}
+
+.mat-primary {
+  --mdc-circular-progress-active-indicator-color: #21d07a;
+}

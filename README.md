@@ -3,6 +3,7 @@
 ![Screenshot](https://lh3.googleusercontent.com/u/0/drive-viewer/AITFw-zWoH2kmqB-75nVnue855rHwmAuxTK2NfDqLDGUlDSrkFe51YlusRO2_wbvCxzbbm4wvkyBpbbJf4WpbjoaJpLXxByQFw=w1920-h1080)
 
 This is an Angular 15 project that connects to the [TMDB API](https://www.themoviedb.org/documentation/api) to fetch and list movies. You can see the live demo of the app [here](https://angulartmdb.000webhostapp.com/movies).
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
 
 ## Features ✨
 

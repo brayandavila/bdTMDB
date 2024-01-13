@@ -1,40 +1,54 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { MoviesList } from '../interfaces/movies-list';
-import { environment } from 'src/environments/environment.development';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { GenresMovie } from '../interfaces/genres-movie';
-import { MovieDetails } from '../interfaces/movie-details.interface';
 import { MovieCredits } from '../interfaces/movie-credits.interface';
+import { MovieDetails } from '../interfaces/movie-details.interface';
+import { MoviesResult } from '../interfaces/movies-result';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
-  popularURL = `${environment.apiURL}movie/popular${environment.apiKey}${environment.lenguaje}`;
-  search = `${environment.apiURL}search/movie${environment.apiKey}${environment.lenguaje}`;
+  public loadingSubject = new BehaviorSubject<boolean>(true);
+  loading$: Observable<boolean> = this.loadingSubject.asObservable();
+
+  private popularURL = `${environment.apiURL}movie/popular${environment.apiKey}${environment.lenguaje}`;
+  private searchURL = `${environment.apiURL}search/movie${environment.apiKey}${environment.lenguaje}`;
+
   constructor(private http: HttpClient) { }
 
-  public getMovies(section: string, page: number) {
-    return this.http.get<MoviesList>(`${environment.apiURL}movie/${section}${environment.apiKey}${environment.lenguaje}&page=${page}`)
+  getMovies(section: string | null, page: number = 1): Observable<MoviesResult> {
+    const url = `${environment.apiURL}movie/${section}${environment.apiKey}${environment.lenguaje}&page=${page}`;
+    return this.http.get<MoviesResult>(url);
   }
 
-  public searchMovie(query: string, page: number) {
-    return this.http.get<MoviesList>(this.search + '&page=' + page + '&query=' + query)
+  searchMovie(query: string | null, page: number = 1): Observable<MoviesResult> {
+    const url = query
+      ? `${this.searchURL}&page=${page}&query=${query}`
+      : `${this.popularURL}&page=${page}`;
+    return this.http.get<MoviesResult>(url);
   }
 
-  public getGenres() {
-    return this.http.get<GenresMovie>(environment.apiURL + 'genre/movie/list' + environment.apiKey + environment.lenguaje)
+  getGenres(): Observable<GenresMovie> {
+    const url = `${environment.apiURL}genre/movie/list${environment.apiKey}${environment.lenguaje}`;
+    return this.http.get<GenresMovie>(url);
   }
 
-  public discover(params: any, page: number) {
-    return this.http.get<MoviesList>(environment.apiURL + 'discover/movie' + environment.apiKey + environment.lenguaje + '&page=' + page, { params })
+  discover(params: any, page: number = 1): Observable<MoviesResult> {
+    const url = `${environment.apiURL}discover/movie${environment.apiKey}${environment.lenguaje}&page=${page}`;
+    return this.http.get<MoviesResult>(url, { params: new HttpParams({ fromObject: params }) });
   }
 
-  public getMovie(id: number) {
-    return this.http.get<MovieDetails>(`${environment.apiURL}movie/${id}${environment.apiKey}${environment.lenguaje}`)
+  getMovie(id: number): Observable<MovieDetails> {
+    const url = `${environment.apiURL}movie/${id}${environment.apiKey}${environment.lenguaje}`;
+    return this.http.get<MovieDetails>(url);
   }
 
-  public getCast(id: number) {
-    return this.http.get<MovieCredits>(`${environment.apiURL}movie/${id}/credits${environment.apiKey}${environment.lenguaje}`)
+  getCast(id: number): Observable<MovieCredits> {
+    const url = `${environment.apiURL}movie/${id}/credits${environment.apiKey}${environment.lenguaje}`;
+    return this.http.get<MovieCredits>(url);
   }
 }

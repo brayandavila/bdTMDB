@@ -1,0 +1,19 @@
+@use "@angular/material" as mat;
+@include mat.core();
+$bdTMDB-primary: mat.define-palette(mat.$pink-palette);
+$bdTMDB-accent: mat.define-palette(mat.$blue-grey-palette);
+$bdTMDB-warn: mat.define-palette(mat.$red-palette);
+$bdTMDB-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $bdTMDB-primary,
+      accent: $bdTMDB-accent,
+      warn: $bdTMDB-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: -3,
+  )
+);
+
+@include mat.all-component-themes($bdTMDB-theme);
+//@import "./assets/scss/_variables-dark.scss";

@@ -2,181 +2,64 @@
   <div class="col-lg-3 pt-3 mb-4 border-end">
     <h6>Filtros</h6>
     <div class="row pt-3">
-      <ng-container [formGroup]="form">
-        <mat-accordion multi>
-          <mat-expansion-panel
-            [expanded]="filters_search"
-            class="mat-elevation-z3"
-          >
-            <mat-expansion-panel-header>
-              <mat-panel-title> Buscar </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <div class="row">
-              <mat-form-field class="col" appearance="outline">
-                <mat-label>Buscar</mat-label>
-                <input
-                  formControlName="name"
-                  matInput
-                  placeholder="Busca por nombre"
-                />
-                <mat-icon matSuffix>search</mat-icon>
-              </mat-form-field>
-            </div>
-          </mat-expansion-panel>
-          <mat-expansion-panel
-            [expanded]="filters_section"
-            class="mat-elevation-z3"
-          >
-            <mat-expansion-panel-header>
-              <mat-panel-title> Filtrar </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <div class="row">
-              <mat-radio-group
-                (change)="getMovies($event.value)"
-                class="radio-group py-3"
-                formControlName="section"
-              >
-                <mat-radio-button
-                  class="radio-button"
-                  color="primary"
-                  [checked]="form.get('section').value == 'popular'"
-                  value="popular"
-                >
-                  Popular
-                </mat-radio-button>
-                <mat-radio-button
-                  class="radio-button"
-                  color="primary"
-                  [checked]="form.get('section').value == 'now_playing'"
-                  value="now_playing"
-                >
-                  En cartelera hoy
-                </mat-radio-button>
-                <mat-radio-button
-                  class="radio-button"
-                  color="primary"
-                  [checked]="form.get('section').value == 'upcoming'"
-                  value="upcoming"
-                >
-                  Próximamente
-                </mat-radio-button>
-                <mat-radio-button
-                  class="radio-button"
-                  color="primary"
-                  [checked]="form.get('section').value == 'top_rated'"
-                  value="top_rated"
-                >
-                  Mejor valoradas
-                </mat-radio-button>
-              </mat-radio-group>
-            </div>
-          </mat-expansion-panel>
-          <mat-expansion-panel
-            [expanded]="filters_genres"
-            class="mat-elevation-z3"
-          >
-            <mat-expansion-panel-header>
-              <mat-panel-title> Géneros </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <div class="row">
-              <mat-chip-listbox [multiple]="true" formControlName="genrer">
-                <mat-chip-option
-                  [selected]="
-                    form.get('genrer').value &&
-                    form.get('genrer').value.includes(genre.id)
-                  "
-                  [value]="genre.id"
-                  *ngFor="let genre of genres"
-                  >{{ genre.name }}</mat-chip-option
-                >
-              </mat-chip-listbox>
-            </div>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </ng-container>
+      <mat-accordion multi>
+        <app-expansion-panel [expanded]="expandedFilters" title="Buscar">
+          <app-search #searchComponent (getMovies)="setMovies($event)" />
+        </app-expansion-panel>
+        <app-expansion-panel [expanded]="expandedFilters" title="Filtrar">
+          <app-filters #filtersComponent (getMovies)="setMovies($event)" />
+        </app-expansion-panel>
+        <app-expansion-panel [expanded]="expandedFilters" title="Géneros">
+          <app-genres
+            #genresComponent
+            (getMovies)="setMovies($event)"
+            (getGenresList)="getGenresList($event)"
+          />
+        </app-expansion-panel>
+      </mat-accordion>
     </div>
   </div>
+
   <div class="col-lg-9">
-    <div class="row mb-3">
-      <div class="col-lg-6 d-flex align-items-center">
-        <h4>{{ title }}</h4>
-      </div>
-      <div class="col-lg-6">
-        <mat-paginator
-          *ngIf="movies.length > 0"
-          [length]="paginator.length"
-          [pageSize]="movies.length"
-          [hidePageSize]="true"
-          [pageIndex]="paginator.page - 1"
-          (page)="handlePageEvent($event)"
-          aria-label="Select page"
-        >
-        </mat-paginator>
-      </div>
-    </div>
-    <ng-container *ngIf="!loading; else placeholder">
-      <ng-container *ngIf="movies.length > 0; else notData">
-        <div
-          class="row row-cols-2 row-cols-md-4 row-cols-sm-3 row-cols-lg-5 g-3 g-lg-3"
-        >
-          <ng-container *ngFor="let movie of movies">
-            <div class="d-flex align-items-stretch">
-              <div
-                class="card text-bg-light w-100 card-hover rounded"
-                role="button"
-                [routerLink]="['/movies', movie.id]"
-              >
-                <img
-                  class="card-img-top card-img-custom"
-                  [src]="getImagePath(movie.poster_path)"
-                />
-                <div class="card-body">
-                  <h6 class="fs-7 mb-0">{{ movie.title }}</h6>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                  <div class="fs-7">{{ movie.release_date | date }}</div>
-                  <div>
-                    <span
-                      class="badge rounded-pill"
-                      [class]="
-                        movie.vote_average >= 7
-                          ? 'text-bg-success'
-                          : movie.vote_average <= 4
-                          ? 'text-bg-danger'
-                          : movie.vote_average < 7 && movie.vote_average > 4
-                          ? 'text-bg-warning'
-                          : ''
-                      "
-                      >{{ movie.vote_average | number }}</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-container>
-        </div>
-      </ng-container>
-    </ng-container>
-    <mat-paginator
-      *ngIf="movies.length > 0"
-      [length]="paginator.length"
-      [pageSize]="movies.length"
-      [hidePageSize]="true"
-      [pageIndex]="paginator.page - 1"
-      (page)="handlePageEvent($event)"
-      aria-label="Select page"
+    <div
+      class="d-flex justify-content-between flex-wrap align-items-center mb-3"
     >
-    </mat-paginator>
+      <h4>{{ loading ? "Cargando..." : title }}</h4>
+      @if (movies && movies.length > 0) {
+        <app-paginator
+          [paginationMat]="paginator"
+          (changePaginate)="getMovies($event)"
+        />
+      }
+    </div>
+    <!-- row-cols-2 row-cols-md-4 row-cols-sm-3 row-cols-lg-5 -->
+    <div
+      class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 g-3 g-lg-3"
+    >
+      @if (loading) {
+        @for (item of items; track $index) {
+          <app-placeholder-list />
+        }
+      }
+      @for (movie of movies; track $index) {
+        <app-movie-card [movie]="movie" [routerLink]="[movie.id]" />
+      } @empty {
+        @if (!loading) {
+          <app-loading-or-not-data
+            class="col-12"
+            text="No existen películas para mostrar"
+          ></app-loading-or-not-data>
+        }
+      }
+    </div>
+
+    @if (movies && movies.length > 0) {
+      <div class="d-flex justify-content-end mt-3">
+        <app-paginator
+          [paginationMat]="paginator"
+          (changePaginate)="getMovies($event)"
+        />
+      </div>
+    }
   </div>
 </div>
-
-<ng-template #notData>
-  <app-not-data [text]="'No existen películas para mostrar'"></app-not-data>
-</ng-template>
-
-<ng-template #placeholder>
-  <app-placeholder-list></app-placeholder-list>
-</ng-template>

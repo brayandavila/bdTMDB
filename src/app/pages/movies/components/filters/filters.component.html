@@ -1,0 +1,16 @@
+<div class="row">
+  <mat-radio-group
+    class="d-flex flex-column py-3"
+    [formControl]="movieListFilter"
+  >
+    @for (item of filters; track $index) {
+      <mat-radio-button
+        class="radio-button"
+        color="primary"
+        [value]="item.value"
+      >
+        {{ item.name }}
+      </mat-radio-button>
+    }
+  </mat-radio-group>
+</div>

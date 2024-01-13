@@ -4,4 +4,5 @@ export interface GenresMovie {
 export interface Genre {
   id: number;
   name: string;
+  color: string;
 }

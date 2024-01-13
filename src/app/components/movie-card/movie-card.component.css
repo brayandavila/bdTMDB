@@ -1,0 +1,18 @@
+.title-movie {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.card-movie {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transition:
+    box-shadow 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+  transform: scale(1);
+}
+
+.card-movie:hover {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  transform: scale(1.03);
+}

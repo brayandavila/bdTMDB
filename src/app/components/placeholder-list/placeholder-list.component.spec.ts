@@ -8,10 +8,10 @@ describe('PlaceholderListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlaceholderListComponent ]
+      imports: [PlaceholderListComponent]
     })
     .compileComponents();
-
+    
     fixture = TestBed.createComponent(PlaceholderListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,0 +1,13 @@
+@if (genresList$ | async; as result) {
+  <div class="row">
+    <mat-chip-listbox [multiple]="true" [formControl]="filterGender">
+      @for (genre of result.genres; track genre.id) {
+        <mat-chip-option [value]="genre.id">{{ genre.name }}</mat-chip-option>
+      }
+    </mat-chip-listbox>
+  </div>
+} @else if (errorMessage) {
+  {{ errorMessage }}
+} @else {
+  Cargando...
+}
