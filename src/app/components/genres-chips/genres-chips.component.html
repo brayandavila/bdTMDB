@@ -1,0 +1,8 @@
+@for (genre of genresWithColors; track $index) {
+  <span
+    class="badge rounded-pill"
+    [ngStyle]="{ 'background-color': genre.color }"
+  >
+    {{ genre.name }}
+  </span>
+}

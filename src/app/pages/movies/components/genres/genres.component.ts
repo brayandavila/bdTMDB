@@ -66,11 +66,7 @@ export class GenresComponent implements OnInit {
         return EMPTY;
       }),
       tap((genresResult: GenresMovie) => {
-        const genresWithColors = genresResult.genres.map((genre) => ({
-          ...genre,
-          color: this.genreColors[genre.id] || '#ffffff',
-        }));
-        this.getGenresList.emit(genresWithColors);
+        this.getGenresList.emit(genresResult.genres);
       }));
   }
 

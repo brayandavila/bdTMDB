@@ -15,16 +15,7 @@
     <h6 class="fs-7 title-movie" [title]="movie.title">
       {{ movie.title }}
     </h6>
-    <div class="d-flex flex-wrap gap-2">
-      @for (genre of movie.genres; track $index) {
-        <span
-          class="badge rounded-pill"
-          [ngStyle]="{ 'background-color': genre.color }"
-        >
-          {{ genre.name }}
-        </span>
-      }
-    </div>
+    <app-genres-chips [genres]="movie.genres" />
   </div>
   <div class="card-footer d-flex justify-content-between align-items-center">
     <small>{{ movie.release_date | date: "MMMM d, y" }}</small>

@@ -1,62 +1,81 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MoviesService } from '../../core/services/movies.service';
-import { ActivatedRoute } from '@angular/router';
-import { DatePipe, DecimalPipe, NgStyle, ViewportScroller } from '@angular/common';
+import { DatePipe, DecimalPipe, ViewportScroller } from '@angular/common';
+import { ScoreComponent } from '../../components/score/score.component';
+import { Cast, MovieCredits } from '../../core/interfaces/movie-credits.interface';
+import { MovieDetails } from '../../core/interfaces/movie-details.interface';
+import { getImage } from '../../core/utils/get-image';
+import { BackgroundImageComponent } from '../../components/background-image/background-image.component';
+import { GenresChipsComponent } from '../../components/genres-chips/genres-chips.component';
+import { countryName } from '../../core/utils/country-name';
+import { ImdbButtonComponent } from '../../components/imdb-button/imdb-button.component';
+import { TimeConverterComponent } from '../../components/time-converter/time-converter.component';
 
 @Component({
   selector: 'app-movie-details',
   standalone: true,
-  imports: [NgStyle, DecimalPipe, DatePipe],
+  imports: [
+    DecimalPipe,
+    DatePipe,
+    ScoreComponent,
+    BackgroundImageComponent,
+    GenresChipsComponent,
+    ImdbButtonComponent,
+    TimeConverterComponent
+  ],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.scss'
 })
 export class MovieDetailsComponent implements OnInit {
-  movie: any = {};
-  cast: any[] = [];
+
+  @Input() id!: number;
+
+  movie!: MovieDetails;
+
+  cast!: Cast[];
+
   loading: boolean = true;
+
+  year!: string | null;
+
+  countryName!: string;
+
+  countryNameList = countryName;
+
   constructor(
-    private _movies: MoviesService,
-    private route: ActivatedRoute,
+    private moviesService: MoviesService,
     private scroll: ViewportScroller,
   ) {
 
   }
   ngOnInit(): void {
     this.scroll.scrollToPosition([0, 0]);
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      this.getMovie(id)
-      this.getCast(id);
+    this.getMovie(this.id)
+    this.getCast(this.id);
+  }
+
+  getMovie(id: number) {
+    this.moviesService.getMovie(id).subscribe({
+      next: (response: MovieDetails) => {
+        this.movie = response;
+        this.year = new DatePipe('en-US').transform(this.movie.release_date, 'yyyy');
+        this.countryName = this.countryNameList.find(x => x.codigo === this.movie.original_language.toUpperCase())?.nombre || '';
+        this.loading = false
+      }
     })
   }
 
-  getBackgroundImageStyle(path: string): string {
-    return `linear-gradient(rgba(52,41,49,0.80), rgba(0,0,0,0.85)), url(https://image.tmdb.org/t/p/w1280/${path})`;
-  }
-
-  getMovie(id: any) {
-    this._movies.getMovie(id).subscribe((res => {
-      this.movie = res;
-      this.loading = false;
-    }))
-  }
-
   getCast(id: any) {
-    this._movies.getCast(id).subscribe(response => {
-      this.cast = response.cast;
+    this.moviesService.getCast(id).subscribe({
+      next: (response: MovieCredits) => {
+        this.cast = response.cast;
+      }
     });
   }
 
-  getImagePath(path: string): string {
-    if (typeof path === 'undefined' || path === null) {
-      return 'assets/img/noimage.webp';
-    } else {
-      return 'https://image.tmdb.org/t/p/w500/' + path;
-    }
+  getImage(path: string, size: string): string {
+    return getImage(path, size)
   }
 
-  getImageBack(path: string): string {
-    return 'https://image.tmdb.org/t/p/w1280/' + path;
-  }
 }

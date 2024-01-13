@@ -1,0 +1,15 @@
+.mxh-35-r {
+  max-height: 35rem;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.min-h-vp-nav {
+  min-height: calc(100vh - 58px);
+}

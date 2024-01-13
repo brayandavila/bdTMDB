@@ -14,6 +14,10 @@ export class ScoreComponent implements OnChanges {
 
   @Input() score!: number;
 
+  @Input() size: number = 40;
+
+  @Input() strokeWidth: number = 8;
+
   value!: number;
 
   valueColor!: string;
@@ -29,7 +33,7 @@ export class ScoreComponent implements OnChanges {
 
   generateColors(): void {
     if (this.score >= 7) {
-      this.valueColor = '#21d07a';
+      this.valueColor = '#21CB77';
       this.rangeColor = '#1D4028';
     } else if (this.score <= 4) {
       this.valueColor = '#eb1114';

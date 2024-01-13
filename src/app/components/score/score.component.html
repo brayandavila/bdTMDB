@@ -1,8 +1,11 @@
-<p-knob
-  [(ngModel)]="score"
-  [valueColor]="valueColor"
-  [rangeColor]="rangeColor"
-  textColor="#fff"
-  [size]="40"
-  [strokeWidth]="4"
-></p-knob>
+<div class="rounded-circle" style="background-color: #081c22">
+  <p-knob
+    [(ngModel)]="score"
+    [valueColor]="valueColor"
+    [rangeColor]="rangeColor"
+    textColor="#fff"
+    [size]="size"
+    [strokeWidth]="strokeWidth"
+    [disabled]="true"
+  ></p-knob>
+</div>

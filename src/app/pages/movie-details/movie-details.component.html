@@ -1,114 +1,61 @@
 @if (!loading) {
-  <div
-    class="background-movie-detail"
-    [ngStyle]="{
-      'background-image': getBackgroundImageStyle(movie.backdrop_path)
-    }"
-  >
+  <app-background-image [image]="movie.backdrop_path">
     <div class="row">
-      <div class="col-md-4 px-5 pt-5 mb-4">
+      <div class="col-sm-5 col-md-6 col-lg-4 p-5">
         <img
-          [src]="getImagePath(movie.poster_path)"
-          class="img-fluid rounded mx-auto d-block img-path-movie-detail"
-          alt="{{ movie.title }}"
+          [src]="getImage(movie.poster_path, 'w500')"
+          class="img-fluid rounded mx-auto d-block mxh-35-r"
+          [alt]="movie.title"
         />
       </div>
-      <div class="col-md-8 p-5">
-        <div class="d-flex align-items-center">
-          <h2 class="fw-bold me-3">{{ movie.title }}</h2>
-          <span
-            class="badge rounded-pill"
-            [class]="
-              movie.vote_average >= 7
-                ? 'text-bg-success'
-                : movie.vote_average <= 4
-                  ? 'text-bg-danger'
-                  : movie.vote_average < 7 && movie.vote_average > 4
-                    ? 'text-bg-warning'
-                    : ''
-            "
-            >{{ movie.vote_average | number: "1.0-0" }}
-            <i class="fa fa-star"></i
-          ></span>
-          <!-- <span class="text-muted fs-6">
-                {{ movie.vote_average | number : "1.0-0" }} <i class="fa fa-star"></i>
-              </span> -->
+      <div class="col-sm-7 col-md-6 col-lg-8 p-5">
+        <h2 class="d-flex flex-wrap gap-2">
+          <span class="fw-bold">{{ movie.title }}</span>
+          <span class="text-muted">({{ year }})</span>
+          <span>
+            <app-imdb-button [imdbUrl]="movie.imdb_id" />
+          </span>
+        </h2>
+        <app-genres-chips [genres]="movie.genres" />
+        <div class="d-flex my-4">
+          <app-score [score]="movie.vote_average" [size]="60" />
         </div>
 
-        <br />
-        <div class="fw-bold fs-5">Resumen</div>
-        <p class="text-justify fs-6">
-          {{
-            movie.overview ||
-              "No se ha encontrado una descripción para" + movie.title
-          }}
+        <h5 class="fw-bold fs-5">Resumen</h5>
+        <p class="text-justify fs-6 text-balance">
+          {{ movie.overview }}
         </p>
-        <p class="fs-6 fst-italic">{{ movie.tagline || "" }}</p>
-        <div class="row">
+        <span class="fs-6 fst-italic">{{ movie.tagline }}</span>
+        <div class="row mt-3">
           <div class="col-md">
-            <div class="fw-bold fs-5">Géneros:</div>
-            <p>
-              @for (item of movie.genres; track $index) {
-                <span>{{ item.name }}. </span>
-              }
-            </p>
+            <span class="fw-bold">Título original: </span>
+            <span class="text-muted">{{ movie.original_title }}</span>
           </div>
           <div class="col-md">
-            <div class="fw-bold fs-5">Título original:</div>
-            @if (movie.original_title) {
-              <p>{{ movie.original_title }}</p>
-            }
-          </div>
-          <div class="col-md">
-            <div class="fw-bold fs-5">Lenguaje original:</div>
-            @if (movie.original_language) {
-              <p>{{ movie.original_language }}</p>
-            }
+            <span class="fw-bold"> Lenguaje original: </span>
+            <span class="text-muted">{{ countryName }}</span>
           </div>
         </div>
-        <div class="row">
+        <div class="row mt-3">
           <div class="col-md">
-            <div class="fw-bold fs-5">Estado:</div>
-            @if (movie.status) {
-              <p>{{ movie.status }}</p>
-            }
+            <span class="fw-bold">Número de valoraciones: </span>
+            <span class="text-muted">{{ movie.vote_count | number }}</span>
           </div>
           <div class="col-md">
-            <div class="fw-bold fs-5">Fecha de estreno:</div>
-            @if (movie.release_date) {
-              <p>{{ movie.release_date | date }}</p>
-            }
+            <span class="fw-bold">Página web: </span>
+            <a class="text-muted" target="_blank" [href]="movie.homepage">
+              Visita la web
+            </a>
           </div>
-          <div class="col-md">
-            <div class="fw-bold fs-5">Número de valoraciones:</div>
-            @if (movie.vote_count) {
-              <p>{{ movie.vote_count | number }}</p>
-            }
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md">
-            <div class="fw-bold fs-5">Popularidad:</div>
-            @if (movie.popularity) {
-              <p>{{ movie.popularity | number }}</p>
-            }
-          </div>
-          <div class="col-md">
-            <div class="fw-bold fs-5">Página Web:</div>
-            <p>
-              <a
-                class="link-light"
-                target="_blank"
-                [href]="movie.homepage || ''"
-                >Visita la web</a
-              >
-            </p>
-          </div>
-          <div class="col"></div>
         </div>
       </div>
     </div>
-  </div>
+    <app-time-converter
+      [minutes]="movie.runtime"
+      style="position: absolute; bottom: 4px; right: 10px"
+    />
+  </app-background-image>
+
   <h3 class="text-center mt-5">Actores de la película</h3>
   <div class="container-fluid horizontal-scroll">
     <div class="row text-center py-4">
@@ -117,7 +64,7 @@
           <div class="card text-bg-dark card-hover rounded" role="button">
             <img
               class="card-img-top"
-              [src]="getImagePath(cas.profile_path)"
+              [src]="getImage(cas.profile_path, 'w500')"
               alt="afsdfs"
             />
             <div class="card-body">
