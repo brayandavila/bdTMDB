@@ -4,7 +4,7 @@
   [routerLink]="['/movies', movie.id]"
 >
   <img
-    class="card-img-top position-relative object-fit-cover w-auto"
+    class="card-img-top position-relative object-fit-cover h-auto"
     [ngSrc]="getImagePath(movie.poster_path)"
     width="260"
     height="390"
@@ -17,7 +17,9 @@
     </h6>
     <app-genres-chips [genres]="movie.genres" />
   </div>
-  <div class="card-footer d-flex justify-content-between align-items-center">
+  <div
+    class="card-footer d-flex justify-content-between align-items-center fs-7"
+  >
     <small>{{ movie.release_date | date: "MMMM d, y" }}</small>
     <app-score [score]="movie.vote_average" />
   </div>

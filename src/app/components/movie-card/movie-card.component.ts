@@ -26,6 +26,6 @@ export class MovieCardComponent {
   @Input() movie!: Movie;
 
   getImagePath(path: string): string {
-    return getImage(path);
+    return getImage(path, 'w500');
   }
 }
