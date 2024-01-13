@@ -2,7 +2,7 @@
 
 ![Screenshot](https://lh3.googleusercontent.com/u/0/drive-viewer/AITFw-zWoH2kmqB-75nVnue855rHwmAuxTK2NfDqLDGUlDSrkFe51YlusRO2_wbvCxzbbm4wvkyBpbbJf4WpbjoaJpLXxByQFw=w1920-h1080)
 
-This is an Angular 15 project that connects to the [TMDB API](https://www.themoviedb.org/documentation/api) to fetch and list movies. You can see the live demo of the app [here](https://angulartmdb.000webhostapp.com/movies).
+This is an Angular 17 project that connects to the [TMDB API](https://www.themoviedb.org/documentation/api) to fetch and list movies. You can see the live demo of the app [here](https://angulartmdb.000webhostapp.com/movies).
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
 
 ## Features ✨
@@ -13,16 +13,19 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Technologies Used 🛠️
 
-- Angular 15
+- Angular 17
 - HTML5, CSS3, and JavaScript
+- TypeScript for type checking
+- RxJS for managing asynchronous operations
+- Bootstrap for styling
 - [TMDB API](https://www.themoviedb.org/documentation/api) for movie data
 
 ## Installation 🚀
 
 1. Clone the repository: `git clone https://github.com/your-username/your-angular-tmdb-app.git`
-2. Navigate to the project directory: `cd your-angular-tmdb-app`
+2. Navigate to the project directory: `cd bdTMDB`
 3. Install dependencies: `npm install`
-4. Run the development server: `ng serve`
+4. Run the development server: `npm start`
 5. Open your browser and go to `http://localhost:4200/` to see the app in action.
 
 ## Usage 🎥
@@ -41,7 +44,7 @@ Thanks to the [TMDB API](https://www.themoviedb.org/documentation/api) for provi
 
 ## Live Demo 🌐
 
-You can see the live demo of the app [here](https://angulartmdb.000webhostapp.com/movies).
+You can see the live demo of the app [here](https://movies-bd.netlify.app).
 
 ## Contact 📧
 
