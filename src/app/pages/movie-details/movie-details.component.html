@@ -55,41 +55,29 @@
       style="position: absolute; bottom: 4px; right: 10px"
     />
   </app-background-image>
-
-  <h3 class="text-center mt-5">Actores de la película</h3>
-  <div class="container-fluid horizontal-scroll">
-    <div class="row text-center py-4">
-      @for (cas of cast; track $index) {
-        <div class="col-md-2 col-sm-6 col-xs-6 h-100 card-list-horizontal">
-          <div class="card text-bg-dark card-hover rounded" role="button">
-            <img
-              class="card-img-top"
-              [src]="getImage(cas.profile_path, 'w500')"
-              alt="afsdfs"
-            />
-            <div class="card-body">
-              <h6 class="card-title">{{ cas.character }}</h6>
-              <p class="card-text">{{ cas.original_name }}</p>
-            </div>
-          </div>
-        </div>
-      }
+  <div class="row">
+    <div class="col-md-9">
+      <app-horizontal-people [id]="id" />
     </div>
+    <div class="col-md-3"></div>
   </div>
-  <!-- <div class="container-fluid" >
-          <h2 class="text-center">Videos</h2><br>
-          <div class="container-fluid scrollh">
-              <div class="row text-center">
-                  <div class="col-6" *ngFor="let vid of video">
-                      <youtube-player
-                          videoId="{{vid.key}}"
-                          suggestedQuality="highres"
-                          [height]="250" [width]="500"
-                          [startSeconds]="4"
-                          [endSeconds]="8">
-                      </youtube-player>
-                  </div>
-              </div>
-          </div>
-      </div> -->
+} @else {
+  <app-plahecolder-details />
 }
+
+<!-- <div class="container-fluid" >
+        <h2 class="text-center">Videos</h2><br>
+        <div class="container-fluid scrollh">
+            <div class="row text-center">
+                <div class="col-6" *ngFor="let vid of video">
+                    <youtube-player
+                        videoId="{{vid.key}}"
+                        suggestedQuality="highres"
+                        [height]="250" [width]="500"
+                        [startSeconds]="4"
+                        [endSeconds]="8">
+                    </youtube-player>
+                </div>
+            </div>
+        </div>
+    </div> -->

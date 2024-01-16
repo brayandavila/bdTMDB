@@ -33,13 +33,13 @@ export class ScoreComponent implements OnChanges {
 
   generateColors(): void {
     if (this.score >= 7) {
-      this.valueColor = '#21CB77';
+      this.valueColor = 'LightGreen';
       this.rangeColor = '#1D4028';
     } else if (this.score <= 4) {
       this.valueColor = '#eb1114';
       this.rangeColor = '#5B1B1B';
     } else if (this.score < 7 && this.score > 4) {
-      this.valueColor = '#bebf2c';
+      this.valueColor = 'Yellow';
       this.rangeColor = '#3E3A10';
     }
   }

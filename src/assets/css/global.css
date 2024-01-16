@@ -21,3 +21,41 @@
 .fs-8 {
   font-size: 0.6rem;
 }
+
+.h-35-r {
+  height: 35rem;
+}
+
+.aspect-radio-2-3 {
+  aspect-ratio: 2 / 3;
+}
+
+.min-width-120px {
+  min-width: 120px;
+}
+
+.width-120px {
+  width: 120px;
+}
+
+.height-133px {
+  height: 133px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #212529;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a1a1a1;
+}
