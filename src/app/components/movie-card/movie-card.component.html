@@ -21,6 +21,6 @@
     class="card-footer d-flex justify-content-between align-items-center fs-7"
   >
     <small>{{ movie.release_date | date: "MMMM d, y" }}</small>
-    <app-score [score]="movie.vote_average" />
+    <app-score [score]="movie.vote_average" [size]="40" />
   </div>
 </div>

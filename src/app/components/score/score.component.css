@@ -1,11 +1,12 @@
-.mat-warn {
-  --mdc-circular-progress-active-indicator-color: #bebf2c;
+.circle-progress-custom {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1);
 }
 
-.mat-accent {
-  --mdc-circular-progress-active-indicator-color: #eb1114;
-}
-
-.mat-primary {
-  --mdc-circular-progress-active-indicator-color: #21d07a;
+.circle-progress-custom:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
 }

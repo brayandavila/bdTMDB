@@ -16,16 +16,21 @@
             <app-imdb-button [imdbUrl]="movie.imdb_id" />
           </span>
         </h2>
+        <span class="fs-6 fst-italic">{{ movie.tagline }}</span>
         <app-genres-chips [genres]="movie.genres" />
-        <div class="d-flex my-4">
-          <app-score [score]="movie.vote_average" [size]="60" />
+        <div class="d-flex my-4 align-items-center">
+          <app-score [score]="movie.vote_average" [size]="80" />
+          <span class="ms-3"
+            >Puntuación <br />
+            de los <br />
+            usuarios</span
+          >
         </div>
 
         <h5 class="fw-bold fs-5">Resumen</h5>
         <p class="text-justify fs-6 text-balance">
           {{ movie.overview }}
         </p>
-        <span class="fs-6 fst-italic">{{ movie.tagline }}</span>
         <div class="row mt-3">
           <div class="col-md">
             <span class="fw-bold">Título original: </span>

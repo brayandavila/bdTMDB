@@ -1,11 +1,26 @@
-<div class="rounded-circle" style="background-color: #081c22">
-  <p-knob
-    [(ngModel)]="score"
-    [valueColor]="valueColor"
-    [rangeColor]="rangeColor"
-    textColor="#fff"
-    [size]="size"
-    [strokeWidth]="strokeWidth"
-    [disabled]="true"
-  ></p-knob>
-</div>
+<circle-progress
+  [percent]="score"
+  [radius]="100"
+  [outerStrokeWidth]="strokeWidth"
+  [innerStrokeWidth]="strokeWidth"
+  [outerStrokeColor]="valueColor"
+  [innerStrokeColor]="rangeColor"
+  [animation]="true"
+  [animationDuration]="300"
+  [responsive]="true"
+  [showSubtitle]="false"
+  unitsFontSize="30"
+  titleFontSize="80"
+  [radius]="90"
+  [space]="-strokeWidth"
+  titleColor="#fff"
+  unitsColor="#fff"
+  backgroundColor="#081C22"
+  [backgroundPadding]="16"
+  class="d-block circle-progress-custom"
+  [ngStyle]="{
+    'font-size': size + 'px',
+    width: size + 'px',
+    height: size + 'px'
+  }"
+></circle-progress>
