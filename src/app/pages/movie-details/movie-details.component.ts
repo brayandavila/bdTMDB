@@ -12,6 +12,7 @@ import { ImdbButtonComponent } from '../../components/imdb-button/imdb-button.co
 import { TimeConverterComponent } from '../../components/time-converter/time-converter.component';
 import { PlahecolderDetailsComponent } from '../../components/plahecolder-details/plahecolder-details.component';
 import { HorizontalPeopleComponent } from '../../components/horizontal-people/horizontal-people.component';
+import { InformationListComponent } from '../../components/information-list/information-list.component';
 
 @Component({
   selector: 'app-movie-details',
@@ -25,7 +26,8 @@ import { HorizontalPeopleComponent } from '../../components/horizontal-people/ho
     ImdbButtonComponent,
     TimeConverterComponent,
     PlahecolderDetailsComponent,
-    HorizontalPeopleComponent
+    HorizontalPeopleComponent,
+    InformationListComponent
   ],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.scss'

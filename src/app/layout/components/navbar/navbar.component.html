@@ -1,10 +1,12 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow-lg">
-  <div class="container-fluid">
+  <div class="container-fluid px-4">
     <a class="navbar-brand me-2 font-pacifico" routerLink="/">
-      <span class="ps-3">Bray<span class="text-primary">Dev</span></span>
+      <span class="">Bray<span class="text-primary">Dev</span></span>
     </a>
     <button
-      class="navbar-toggler btn bnt-link text-white"
+      mat-mini-fab
+      color="accent"
+      class="navbar-toggler btn"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNavDropdown"
@@ -12,13 +14,7 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span>
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Menu icon"
-          fontIcon="menu"
-        ></mat-icon>
-      </span>
+      <mat-icon>menu</mat-icon>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -33,18 +29,18 @@
           >
         </li>
       </ul>
-      <form class="d-flex">
-        <button type="button" class="btn btn-outline-light px-3 me-2">
+      <form class="d-flex gap-3">
+        <button type="button" class="btn btn-outline-light">
           Inicia sesión
         </button>
-        <button type="button" class="btn btn-light me-3">Regístrate</button>
-        <a
+        <button type="button" class="btn btn-light">Regístrate</button>
+        <!-- <a
           class="btn btn-dark btn-sm px-3 d-flex align-items-center"
           href="https://github.com/brayandavila"
           target="_blank"
           role="button"
           ><i class="fab fa-github"></i
-        ></a>
+        ></a> -->
       </form>
     </div>
   </div>
