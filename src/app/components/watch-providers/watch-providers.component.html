@@ -1,0 +1,17 @@
+@if (watchProviders) {
+  <h6 class="fs-6 mt-5">Servicio proporcionado por:</h6>
+  <img
+    src="assets/img/JustWatch.webp"
+    alt="JustWatch"
+    style="max-width: 150px"
+  />
+  @if (watchProviders.flatrate?.length) {
+    <app-watch-provider [list]="watchProviders.flatrate" title="Stream" />
+  }
+  @if (watchProviders.rent?.length) {
+    <app-watch-provider [list]="watchProviders.rent" title="Alquiler" />
+  }
+  @if (watchProviders.buy?.length) {
+    <app-watch-provider [list]="watchProviders.buy" title="Compra" />
+  }
+}

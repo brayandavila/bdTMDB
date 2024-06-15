@@ -1,23 +1,23 @@
-<ul class="list-group list-group-flush fs-7 mt-5 py-3">
-  <li class="list-group-item">
+<ul class="list-group list-group-flush fs-7">
+  <li class="list-group-item px-0">
     <div class="ms-2 me-auto">
       <div class="fw-bold">Título original</div>
       {{ movie.original_title }}
     </div>
   </li>
-  <li class="list-group-item">
+  <li class="list-group-item px-0">
     <div class="ms-2 me-auto">
       <div class="fw-bold">Estado</div>
       {{ getStatus(movie.status) }}
     </div>
   </li>
-  <li class="list-group-item">
+  <li class="list-group-item px-0">
     <div class="ms-2 me-auto">
       <div class="fw-bold">Presupuesto</div>
       {{ movie.budget | currency }}
     </div>
   </li>
-  <li class="list-group-item">
+  <li class="list-group-item px-0">
     <div class="ms-2 me-auto">
       <div class="fw-bold">Ingresos</div>
       {{ movie.revenue | currency }}

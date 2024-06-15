@@ -13,7 +13,14 @@ import { TimeConverterComponent } from '../../components/time-converter/time-con
 import { PlahecolderDetailsComponent } from '../../components/plahecolder-details/plahecolder-details.component';
 import { HorizontalPeopleComponent } from '../../components/horizontal-people/horizontal-people.component';
 import { InformationListComponent } from '../../components/information-list/information-list.component';
-
+import { WatchProvidersComponent } from '../../components/watch-providers/watch-providers.component';
+import { MovieCredits, Person } from '../../core/interfaces/movie-credits.interface';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+interface DepartmentGroup {
+  name: string;
+  people: any[];
+}
 @Component({
   selector: 'app-movie-details',
   standalone: true,
@@ -27,7 +34,10 @@ import { InformationListComponent } from '../../components/information-list/info
     TimeConverterComponent,
     PlahecolderDetailsComponent,
     HorizontalPeopleComponent,
-    InformationListComponent
+    InformationListComponent,
+    WatchProvidersComponent,
+    MatExpansionModule,
+    MatIconModule
   ],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.scss'
@@ -46,6 +56,12 @@ export class MovieDetailsComponent implements OnInit {
 
   countryNameList = countryName;
 
+  cast!: Person[];
+
+  totalCast!: number;
+
+  crew!: DepartmentGroup[];
+
   constructor(
     private moviesService: MoviesService,
     private scroll: ViewportScroller,
@@ -55,6 +71,7 @@ export class MovieDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.scroll.scrollToPosition([0, 0]);
     this.getMovie(this.id)
+    this.getCast(this.id)
   }
 
   getMovie(id: number) {
@@ -63,15 +80,35 @@ export class MovieDetailsComponent implements OnInit {
         this.movie = response;
         this.year = new DatePipe('en-US').transform(this.movie.release_date, 'yyyy');
         this.countryName = this.countryNameList.find(x => x.codigo === this.movie.original_language.toUpperCase())?.nombre || '';
-        this.loading = false
-        /* setTimeout(() => {
-        }, 555000); */
+        this.loading = false;
       }
     })
   }
 
+  getCast(id: number) {
+    this.moviesService.getCast(id).subscribe({
+      next: (response: MovieCredits) => {
+        this.cast = response.cast.slice(0, 9);
+        this.totalCast = response.cast.length;
+        this.crew = this.groupByDepartment(response.crew);
+      }
+    });
+  }
+
   getImage(path: string, size: string): string {
     return getImage(path, size)
+  }
+
+  groupByDepartment(data: Person[]): DepartmentGroup[] {
+    const groupedData = new Map<string, DepartmentGroup>();
+    data.forEach(item => {
+      const department = item.department ?? '';
+      if (!groupedData.has(department)) {
+        groupedData.set(department, { name: department, people: [] });
+      }
+      groupedData.get(department)!.people.push(item);
+    });
+    return Array.from(groupedData.values());
   }
 
 }

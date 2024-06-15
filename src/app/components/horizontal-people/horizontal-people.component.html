@@ -1,38 +1,35 @@
-<div class="container-fluid ps-lg-5 ms-lg-3 ms-0 ps-2">
-  <h5 class="mt-5">Actores principales</h5>
-  <div
-    class="py-3 overflow-x-auto d-flex flex-row flex-nowrap gap-3 align-items-stretch"
-  >
-    @for (cas of cast; track $index) {
-      <div
-        class="card text-bg-dark card-hover rounded d-block min-width-120px"
-        role="button"
-      >
-        <img
-          class="card-img-top position-relative object-fit-cover width-120px height-133px"
-          [src]="getImage(cas.profile_path, 'w500')"
-          [alt]="cas.original_name"
-          [routerLink]="['/person', cas.id]"
-          width="120"
-          height="133"
-        />
-        <div class="card-body p-2">
-          <h6 class="fs-7 title-movie">{{ cas.original_name }}</h6>
-          <h6 class="fs-8">{{ cas.character }}</h6>
-        </div>
+<div
+  class="py-3 overflow-x-auto d-flex flex-row flex-nowrap gap-3 align-items-stretch"
+>
+  @for (person of people; track $index) {
+    <div
+      class="card text-bg-dark card-hover rounded d-block min-width-120px"
+      role="button"
+    >
+      <img
+        class="card-img-top position-relative object-fit-cover width-120px height-133px"
+        [src]="getImage(person.profile_path, 'w500')"
+        [alt]="person.original_name"
+        [routerLink]="['/person', person.id]"
+        width="120"
+        height="133"
+      />
+      <div class="card-body p-2">
+        <h6 class="fs-7 title-movie">{{ person.original_name }}</h6>
+        <h6 class="fs-8">{{ person.character || person.department }}</h6>
       </div>
-    } @empty {
-      <div class="text-center">No existen actores para mostrar</div>
-    }
-    @if (totalPeople > 9) {
-      <div
-        class="d-flex justify-content-center align-items-center min-width-120px"
-      >
-        <button mat-button (click)="showMore()">
-          Ver más
-          <mat-icon fontIcon="arrow_right_alt"></mat-icon>
-        </button>
-      </div>
-    }
-  </div>
+    </div>
+  } @empty {
+    <div class="text-center">No existen actores para mostrar</div>
+  }
+  @if (totalPeople > 9) {
+    <div
+      class="d-flex justify-content-center align-items-center min-width-120px"
+    >
+      <button mat-button (click)="showMore()">
+        Ver más
+        <mat-icon fontIcon="arrow_right_alt"></mat-icon>
+      </button>
+    </div>
+  }
 </div>

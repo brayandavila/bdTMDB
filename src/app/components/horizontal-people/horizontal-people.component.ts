@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Cast, MovieCredits } from '../../core/interfaces/movie-credits.interface';
-import { MoviesService } from '../../core/services/movies.service';
+import { Component, Input } from '@angular/core';
 import { getImage } from '../../core/utils/get-image';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { Person } from '../../core/interfaces/movie-credits.interface';
 
 @Component({
   selector: 'app-horizontal-people',
@@ -13,34 +12,17 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './horizontal-people.component.html',
   styleUrl: './horizontal-people.component.scss'
 })
-export class HorizontalPeopleComponent implements OnInit {
+export class HorizontalPeopleComponent {
 
-  @Input() id!: number;
+  @Input() people!: Person[];
 
-  cast!: Cast[];
-
-  totalPeople!: number;
-
-  constructor(private moviesService: MoviesService) { }
-
-  ngOnInit(): void {
-    this.getCast(this.id)
-  }
-
-  getCast(id: number) {
-    this.moviesService.getCast(id).subscribe({
-      next: (response: MovieCredits) => {
-        this.cast = response.cast.slice(0, 9);
-        this.totalPeople = response.cast.length;
-      }
-    });
-  }
+  @Input() totalPeople!: number;
 
   getImage(path: string, size: string): string {
     return getImage(path, size)
   }
 
   showMore() {
-    this.getCast(this.id)
+    //this.getCast(this.id)
   }
 }

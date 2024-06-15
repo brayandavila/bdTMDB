@@ -60,12 +60,29 @@
       style="position: absolute; bottom: 4px; right: 10px"
     />
   </app-background-image>
-  <div class="row">
-    <div class="col-md-9">
-      <app-horizontal-people [id]="id" />
+  <div class="container-fluid p-4 p-md-5">
+    <h5>Actores principales</h5>
+    <div class="d-flex flex-wrap flex-md-nowrap align-items-center gap-4">
+      <app-horizontal-people
+        class="w-100 w-md-75"
+        [people]="cast"
+        [totalPeople]="totalCast"
+      />
+      <app-information-list class="w-100" [movie]="movie" />
     </div>
-    <div class="col-md-3">
-      <app-information-list [movie]="movie" />
+    <div class="d-flex flex-wrap flex-md-nowrap gap-4">
+      <div class="w-100 w-md-75">
+        <h5 class="mt-5">Reparto completo y equipo</h5>
+        <!-- @for (department of crew; track $index) {
+          <h5 class="mt-4">{{ department.name }}</h5>
+          <app-horizontal-people
+            class="w-100"
+            [people]="department.people"
+            [totalPeople]="department.people.length"
+          />
+        } -->
+      </div>
+      <app-watch-providers class="w-100" [id]="id" />
     </div>
   </div>
 } @else {

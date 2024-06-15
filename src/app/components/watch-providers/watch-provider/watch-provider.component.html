@@ -1,0 +1,14 @@
+<div class="pt-3">
+  <h6>{{ title }}</h6>
+  <div class="d-flex flex-wrap gap-2">
+    @for (item of list; track $index) {
+      <img
+        [src]="getImage(item.logo_path, 'w200')"
+        [alt]="item.provider_name"
+        [title]="item.provider_name"
+        style="max-width: 50px"
+        class="rounded-circle"
+      />
+    }
+  </div>
+</div>
